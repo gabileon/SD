@@ -1,1 +1,4 @@
-gabi.leon password1 Gabriela León gabriela.leon@usach.cl 1
+gabi.leon
+password1
+maca.perez
+contraseña

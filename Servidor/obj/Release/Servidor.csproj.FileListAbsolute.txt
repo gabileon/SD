@@ -10,3 +10,7 @@ C:\Users\Gabriela\Documents\GitHub\Laboratorio_2_SD\Servidor\bin\Servidor.dll
 C:\Users\Gabriela\Documents\GitHub\Laboratorio_2_SD\Servidor\bin\Servidor.pdb
 C:\Users\Gabriela\Documents\GitHub\Laboratorio_2_SD\Servidor\obj\Release\Servidor.dll
 C:\Users\Gabriela\Documents\GitHub\Laboratorio_2_SD\Servidor\obj\Release\Servidor.pdb
+C:\Users\Macarena\Documents\GitHub\Laboratorio_2_SD\Servidor\bin\Servidor.dll
+C:\Users\Macarena\Documents\GitHub\Laboratorio_2_SD\Servidor\bin\Servidor.pdb
+C:\Users\Macarena\Documents\GitHub\Laboratorio_2_SD\Servidor\obj\Release\Servidor.dll
+C:\Users\Macarena\Documents\GitHub\Laboratorio_2_SD\Servidor\obj\Release\Servidor.pdb

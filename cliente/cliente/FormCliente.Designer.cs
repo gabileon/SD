@@ -37,15 +37,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.nick = new System.Windows.Forms.TextBox();
+            this.nickName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.password = new System.Windows.Forms.TextBox();
-            this.conectarBoton = new System.Windows.Forms.Button();
+            this.botonConectar = new System.Windows.Forms.Button();
             this.desconectarBoton = new System.Windows.Forms.Button();
             this.cambioSala = new System.Windows.Forms.Label();
             this.ayudanteSalaBoton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.botonRegistrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chat
@@ -133,12 +133,12 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Usuario:";
             // 
-            // nick
+            // nickName
             // 
-            this.nick.Location = new System.Drawing.Point(480, 40);
-            this.nick.Name = "nick";
-            this.nick.Size = new System.Drawing.Size(107, 20);
-            this.nick.TabIndex = 9;
+            this.nickName.Location = new System.Drawing.Point(480, 40);
+            this.nickName.Name = "nickName";
+            this.nickName.Size = new System.Drawing.Size(107, 20);
+            this.nickName.TabIndex = 9;
             // 
             // label5
             // 
@@ -156,15 +156,15 @@
             this.password.Size = new System.Drawing.Size(106, 20);
             this.password.TabIndex = 11;
             // 
-            // conectarBoton
+            // botonConectar
             // 
-            this.conectarBoton.Location = new System.Drawing.Point(400, 112);
-            this.conectarBoton.Name = "conectarBoton";
-            this.conectarBoton.Size = new System.Drawing.Size(75, 23);
-            this.conectarBoton.TabIndex = 12;
-            this.conectarBoton.Text = "Conectarse";
-            this.conectarBoton.UseVisualStyleBackColor = true;
-            this.conectarBoton.Click += new System.EventHandler(this.conectarBoton_Click);
+            this.botonConectar.Location = new System.Drawing.Point(400, 112);
+            this.botonConectar.Name = "botonConectar";
+            this.botonConectar.Size = new System.Drawing.Size(75, 23);
+            this.botonConectar.TabIndex = 12;
+            this.botonConectar.Text = "Conectarse";
+            this.botonConectar.UseVisualStyleBackColor = true;
+            this.botonConectar.Click += new System.EventHandler(this.conectarBoton_Click);
             // 
             // desconectarBoton
             // 
@@ -204,14 +204,14 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Si no eres usuario,";
             // 
-            // button1
+            // botonRegistrar
             // 
-            this.button1.Location = new System.Drawing.Point(495, 161);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Registrate";
-            this.button1.UseVisualStyleBackColor = true;
+            this.botonRegistrar.Location = new System.Drawing.Point(495, 161);
+            this.botonRegistrar.Name = "botonRegistrar";
+            this.botonRegistrar.Size = new System.Drawing.Size(92, 23);
+            this.botonRegistrar.TabIndex = 17;
+            this.botonRegistrar.Text = "Registrate";
+            this.botonRegistrar.UseVisualStyleBackColor = true;
             // 
             // FormCliente
             // 
@@ -219,15 +219,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(599, 278);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.botonRegistrar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.ayudanteSalaBoton);
             this.Controls.Add(this.cambioSala);
             this.Controls.Add(this.desconectarBoton);
-            this.Controls.Add(this.conectarBoton);
+            this.Controls.Add(this.botonConectar);
             this.Controls.Add(this.password);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.nick);
+            this.Controls.Add(this.nickName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -263,7 +263,7 @@
         private System.Windows.Forms.Label cambioSala;
         private System.Windows.Forms.Button ayudanteSalaBoton;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button botonRegistrar;
     }
 }
 

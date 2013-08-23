@@ -8,13 +8,13 @@ namespace cliente
 {
     class Comunicacion
     {
-        /*static protected ServicioChat.Service1 Servicio = new ServicioChat.Service1();
-        //----------------------------------------------------------------------------------------------
+        // Atributo para hacer uso de los servivios
+        static protected ServicioChat.Service1 Servicio = new servicioChat.Service1();
+
+
         public int login(String user, String pass, String ip)
         {
-            // Método que permite utilizar el Servicio "login", retornando de forma directa lo recibido
-            // como retorno del WebService, con los parámetros capturados a través del Form "Inicio".
-            // De fallar la operación, retorna un valor que pueda ser identificado por el cliente como tal.
+            // Método que permite utilzar el método login del WS
             try
             {
                 return Servicio.login(user, pass, ip);
@@ -26,7 +26,8 @@ namespace cliente
             }
         }
         //----------------------------------------------------------------------------------------------
-        public int logout(String user)
+        
+        /*public int logout(String user)
         {
             // Método que permite utilizar el Servicio "logout", retornando de forma directa lo recibido
             // como retorno del WebService, con los parámetros capturados a través del Form "Principal".
