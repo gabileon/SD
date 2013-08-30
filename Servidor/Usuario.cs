@@ -11,6 +11,7 @@ namespace Servidor
         public String ip;
         public String pass;
         public int puerto;
+      
 
         public Usuario()
         {
@@ -18,6 +19,7 @@ namespace Servidor
             this.ip = null;
             this.pass = null;
             this.puerto = -1;
+          
         }
 
         public Usuario(String nick, String ip, String password, int puert)
@@ -26,6 +28,7 @@ namespace Servidor
             this.ip = ip;
             this.pass = password;
             this.puerto = puert;
+          
         }
     }
 }

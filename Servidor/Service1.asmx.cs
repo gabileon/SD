@@ -68,7 +68,7 @@ namespace Servidor
                             string mensajito = obtenerTimeStamp(DateTime.Now);
                             mensajito += " <El usuario " + user + " se ha conectado a la sala>: ";
                             bcNuevoMensaje(user, mensajito, "Principal");
-                            
+                            //bcActClientes(user, mensajito, "Principal");
 
                             sr.Close();
                             return 1;
@@ -269,8 +269,19 @@ namespace Servidor
             string time = obtenerTimeStamp(DateTime.Now);
             string mensajeAdios = time + " - " +user + " ha abandonado la conversación.";
             bcNuevoMensaje(user,mensajeAdios,sala);
+
+           //Remueve el usuario de las listas y de la sala
+
             nombreUsuariosConectados.Remove(user);
-            Usuario del;
+            UsuariosConectados.Remove(user);
+            salaPrincipal.Remove(user);
+
+
+         
+           
+          
+           
+
             return 1;
             
 
@@ -279,10 +290,10 @@ namespace Servidor
 
             //Debería registrar cuando incia la conversación pero no lo puedo obtener todavía, solo debería ser cuando entra a la sala
 
-           // FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/"+tiempoinici+user+"_"+user2+".txt", FileMode.Append, FileAccess.Write);
-           // StreamWriter writer = new StreamWriter(stream);
+         //   FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/"+tiempoinici+user+"_"+user2+".txt", FileMode.Append, FileAccess.Write);
+          //  StreamWriter writer = new StreamWriter(stream);
            // writer.WriteLine(time + "<"+user+">" + ": " + mensaje );
-           // writer.Close();
+            //writer.Close();
             
 
         
