@@ -52,7 +52,7 @@ namespace cliente
             // Atributos para obtener la ip local del usuario
             String ipLocal = "";
             int valorLogin = 0;
-            int estado = 1;
+          
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             // Se crea el objeto para acceder a los métodos del WS
 
@@ -193,7 +193,6 @@ namespace cliente
             String user = this.nickName.Text;
             String pass = password.Text;
             FormPerfil perfil = new FormPerfil(user, pass);
-            //this.Hide();
             perfil.Show();
         }
 

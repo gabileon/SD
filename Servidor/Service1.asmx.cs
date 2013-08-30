@@ -64,8 +64,10 @@ namespace Servidor
                             UsuariosConectados.Add(user, usr);
                             nombreUsuariosConectados.Add(user);
                             salaPrincipal.Add(user);
+                            
                             // Se envia el mensaje de que se ha conectado el usuario
                             string mensajito = obtenerTimeStamp(DateTime.Now);
+                            fechaConexion = mensajito;
                             mensajito += " <El usuario " + user + " se ha conectado a la sala>: ";
                             bcNuevoMensaje(user, mensajito, "Principal");
                             //bcActClientes(user, mensajito, "Principal");
@@ -261,10 +263,11 @@ namespace Servidor
         // Método para enviar un mensaje de una sala pública
         public void enviarMensaje(string user, string mensaje, string sala)
         {
+            string timeMsg = obtenerTimeStamp(DateTime.Now);;
             string mensajito = obtenerTimeStamp(DateTime.Now);
             mensajito += " <" + user + ">: " + mensaje;
             bcNuevoMensaje(user, mensajito, sala);
-
+            generarLog(user, mensaje, sala);
             //Para guardar Log, hay qe ver si funciona bien
            
           
@@ -282,22 +285,22 @@ namespace Servidor
             nombreUsuariosConectados.Remove(user);
             UsuariosConectados.Remove(user);
             salaPrincipal.Remove(user);
-
             return 1;
             
 
         }
-        public void generarLog(string user, string mensaje, string sala, string time ){
+        public void generarLog(string user, string mensaje, string sala)
+        {
 
-            
-
-         //   FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/"+tiempoinici+user+"_"+user2+".txt", FileMode.Append, FileAccess.Write);
-          //  StreamWriter writer = new StreamWriter(stream);
-           // writer.WriteLine(time + "<"+user+">" + ": " + mensaje );
-            //writer.Close();
-  
-        
+            FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/"+ sala + "_" + user + ".txt", FileMode.Append, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(stream);
+            writer.WriteLine(obtenerTimeStamp(DateTime.Now) + "<" + user + ">" + ": " + mensaje);
+            writer.Close();
         }
+
+
+  
+     
 
 
         //Obtiene el timestamp
@@ -310,8 +313,7 @@ namespace Servidor
         public void bcNuevoMensaje(string user, string mensaje, string sala)
         {
             string time = obtenerTimeStamp(DateTime.Now);
-            generarLog(user, mensaje, sala, time);   //Debería crearrse cuando inicia una conversación pero creo qe no está ese dato aún pq  no hay salas.
-            mensaje = "avt´" + mensaje;
+                    mensaje = "avt´" + mensaje;
             // Si el mensaje es para la sala Principal
             if (sala.Equals("Principal"))
             {
@@ -321,6 +323,7 @@ namespace Servidor
                     Usuario cli;
                     UsuariosConectados.TryGetValue(cliente, out cli);
                     enviar(mensaje, cli);
+                  
                 }
             }
         }
