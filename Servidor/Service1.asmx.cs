@@ -22,6 +22,8 @@ namespace Servidor
         private static Dictionary<string, Usuario> UsuariosConectados = new Dictionary<string, Usuario>();
         private static List<string> nombreUsuariosConectados = new List<string>();
         private static List<string> salaPrincipal = new List<string>();
+        string fechaConexion;
+        
 
         // Atributo para la asignación de puertos a los clientes
         static protected int puertosCliente = 11000;
@@ -46,7 +48,7 @@ namespace Servidor
             try
             {
                 // Se lee el archivo de texto que guarda los usuarios para comprobar la contraseña ingresada
-                StreamReader sr = new StreamReader("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/Usuarios.txt");
+                StreamReader sr = new StreamReader("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt");
                 linea = sr.ReadLine();
                 // Se lee el archivo línea por línea hasta que se encuentre el usuario que se busca
                 while (linea != null)
@@ -66,6 +68,7 @@ namespace Servidor
                             string mensajito = obtenerTimeStamp(DateTime.Now);
                             mensajito += " <El usuario " + user + " se ha conectado a la sala>: ";
                             bcNuevoMensaje(user, mensajito, "Principal");
+                            
 
                             sr.Close();
                             return 1;
@@ -133,9 +136,9 @@ namespace Servidor
         {
             try
             {
-                if (System.IO.File.Exists("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/Usuarios.txt"))
+                if (System.IO.File.Exists("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt"))
                 {
-                    StreamReader sr = new StreamReader("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/Usuarios.txt");
+                    StreamReader sr = new StreamReader("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt");
                     String line = sr.ReadLine();
 
                     if (username.CompareTo(line) == 0)
@@ -149,8 +152,7 @@ namespace Servidor
                         if (username.CompareTo(line) == 0)
                         {
                             line = sr.ReadLine();
-
-                        }
+                                                    }
                         line = sr.ReadLine();
                     }
                     sr.Close();
@@ -158,10 +160,10 @@ namespace Servidor
             }
             catch (Exception e)
             {
-                Console.WriteLine("----------EXCEPCIÓN DE TIPO:" + e.Message.ToString() + "----------");
+                Console.WriteLine("EXCEPCIÓN DE TIPO:" + e.Message.ToString() + "----------");
                 return -1;
             }
-            FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/Usuarios.txt", FileMode.Append, FileAccess.Write);
+            FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt", FileMode.Append, FileAccess.Write);
             StreamWriter writer = new StreamWriter(stream);
             writer.WriteLine(username);
             writer.WriteLine(password);
@@ -176,10 +178,9 @@ namespace Servidor
         
             try
             {
-                StreamReader sr = new StreamReader("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/Usuarios.txt");
+                StreamReader sr = new StreamReader("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt");
                 String line = sr.ReadLine();
-
-                FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/UsuariosTemporal.txt", FileMode.Create, FileAccess.Write);
+                FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/UsuariosTemporal.txt", FileMode.Create, FileAccess.Write);
                 StreamWriter writer = new StreamWriter(stream);
 
                 while (line != null)
@@ -196,18 +197,15 @@ namespace Servidor
                         writer.WriteLine(line);
                    }
                    //Cuando encuentra al usuario
-
                     else if (user.CompareTo(line) == 0)
                     {
                         writer.WriteLine(line);
                         line = sr.ReadLine();
-
                         //Si la pass antigua coincide
 
                         if(line.CompareTo(passvieja)==0)
                         {
                             //Se escribe la pass nueva que ingresó
-
                             writer.WriteLine(pass);
                             line = sr.ReadLine();
                             writer.WriteLine(line);
@@ -217,21 +215,17 @@ namespace Servidor
                             writer.Close();
                             return 2;
                         }
-
                     }
                     line = sr.ReadLine();
                 }
-
                 sr.Close();
                 writer.Close();
 
                 //Pasó todo lo que escribí del temporal al original
 
-                StreamReader sr2 = new StreamReader("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/UsuariosTemporal.txt");
+                StreamReader sr2 = new StreamReader("C:/Users/Gabriela/Documents/GitHub/SD/UsuariosTemporal.txt");
                 String line2 = sr2.ReadLine();
-
-                FileStream stream2 = new FileStream("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/Usuarios.txt", FileMode.Create, FileAccess.Write);
-                
+                FileStream stream2 = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt", FileMode.Create, FileAccess.Write);
                 StreamWriter writer2 = new StreamWriter(stream2);
 
                 while (line2 != null)
@@ -245,8 +239,7 @@ namespace Servidor
 
                 //Luego que termina la copia, se elimina el archivo de texto temporal
 
-                System.IO.File.Delete("C:/Users/Gabriela/Documents/GitHub/sd_2/Laboratorio_2_SD/UsuariosTemporal.txt");
-
+                System.IO.File.Delete("C:/Users/Gabriela/Documents/GitHub/SD/UsuariosTemporal.txt");
                 return 1;
             }
             catch (Exception e)
@@ -256,8 +249,7 @@ namespace Servidor
             }
         }
         
-        
-        
+
         [WebMethod]
         // Método para enviar un mensaje de una sala pública
         public void enviarMensaje(string user, string mensaje, string sala)
@@ -265,6 +257,36 @@ namespace Servidor
             string mensajito = obtenerTimeStamp(DateTime.Now);
             mensajito += " <" + user + ">: " + mensaje;
             bcNuevoMensaje(user, mensajito, sala);
+
+            //Para guardar Log, hay qe ver si funciona bien
+           
+          
+        }
+        [WebMethod]
+        // Método para desconectarse
+        public int desconectar(string user, string sala)
+        {
+            string time = obtenerTimeStamp(DateTime.Now);
+            string mensajeAdios = time + " - " +user + " ha abandonado la conversación.";
+            bcNuevoMensaje(user,mensajeAdios,sala);
+            nombreUsuariosConectados.Remove(user);
+            Usuario del;
+            return 1;
+            
+
+        }
+        public void generarLog(string user, string mensaje, string sala, string time ){
+
+            //Debería registrar cuando incia la conversación pero no lo puedo obtener todavía, solo debería ser cuando entra a la sala
+
+           // FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/"+tiempoinici+user+"_"+user2+".txt", FileMode.Append, FileAccess.Write);
+           // StreamWriter writer = new StreamWriter(stream);
+           // writer.WriteLine(time + "<"+user+">" + ": " + mensaje );
+           // writer.Close();
+            
+
+        
+        
         }
 
 
@@ -277,6 +299,8 @@ namespace Servidor
         //Broadcast de un mensaje nuevo
         public void bcNuevoMensaje(string user, string mensaje, string sala)
         {
+            string time = obtenerTimeStamp(DateTime.Now);
+            generarLog(user, mensaje, sala, time);   //Debería crearrse cuando inicia una conversación pero creo qe no está ese dato aún pq  no hay salas.
             mensaje = "avt´" + mensaje;
             // Si el mensaje es para la sala Principal
             if (sala.Equals("Principal"))

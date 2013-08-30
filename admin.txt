@@ -1,0 +1,5 @@
+<2013-08-29 23:50:36><admin>: <2013-08-29 23:50:36> <El usuario admin se ha conectado a la sala>: 
+<2013-08-29 23:50:40><admin>: <2013-08-29 23:50:40> <admin>: gfgd
+<2013-08-29 23:50:42><admin>: <2013-08-29 23:50:42> <admin>: gfdgd
+<2013-08-29 23:50:43><admin>: <2013-08-29 23:50:43> <admin>: trtretretretret
+<2013-08-29 23:50:44><admin>: <2013-08-29 23:50:44> - admin ha abandonado la conversación.

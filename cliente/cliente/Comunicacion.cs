@@ -36,6 +36,12 @@ namespace cliente
 
         }
 
+        public int desconectar(String user, String sala) {
+
+            return Servicio.desconectar(user, sala);
+      
+        }
+
         public String entregaConectados()
         {
             // Método que permite utilizar el Servicio "entregaconect", retornando de forma directa lo

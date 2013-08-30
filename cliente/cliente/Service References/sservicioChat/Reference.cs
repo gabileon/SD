@@ -42,6 +42,10 @@ namespace cliente.sservicioChat {
         // CODEGEN: Generating message contract since element name user from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/enviarMensaje", ReplyAction="*")]
         cliente.sservicioChat.enviarMensajeResponse enviarMensaje(cliente.sservicioChat.enviarMensajeRequest request);
+        
+        // CODEGEN: Generating message contract since element name user from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/desconectar", ReplyAction="*")]
+        cliente.sservicioChat.desconectarResponse desconectar(cliente.sservicioChat.desconectarRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -534,6 +538,78 @@ namespace cliente.sservicioChat {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class desconectarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="desconectar", Namespace="http://tempuri.org/", Order=0)]
+        public cliente.sservicioChat.desconectarRequestBody Body;
+        
+        public desconectarRequest() {
+        }
+        
+        public desconectarRequest(cliente.sservicioChat.desconectarRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class desconectarRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string user;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string sala;
+        
+        public desconectarRequestBody() {
+        }
+        
+        public desconectarRequestBody(string user, string sala) {
+            this.user = user;
+            this.sala = sala;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class desconectarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="desconectarResponse", Namespace="http://tempuri.org/", Order=0)]
+        public cliente.sservicioChat.desconectarResponseBody Body;
+        
+        public desconectarResponse() {
+        }
+        
+        public desconectarResponse(cliente.sservicioChat.desconectarResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class desconectarResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int desconectarResult;
+        
+        public desconectarResponseBody() {
+        }
+        
+        public desconectarResponseBody(int desconectarResult) {
+            this.desconectarResult = desconectarResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Service1SoapChannel : cliente.sservicioChat.Service1Soap, System.ServiceModel.IClientChannel {
     }
@@ -655,6 +731,20 @@ namespace cliente.sservicioChat {
             inValue.Body.mensaje = mensaje;
             inValue.Body.sala = sala;
             cliente.sservicioChat.enviarMensajeResponse retVal = ((cliente.sservicioChat.Service1Soap)(this)).enviarMensaje(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        cliente.sservicioChat.desconectarResponse cliente.sservicioChat.Service1Soap.desconectar(cliente.sservicioChat.desconectarRequest request) {
+            return base.Channel.desconectar(request);
+        }
+        
+        public int desconectar(string user, string sala) {
+            cliente.sservicioChat.desconectarRequest inValue = new cliente.sservicioChat.desconectarRequest();
+            inValue.Body = new cliente.sservicioChat.desconectarRequestBody();
+            inValue.Body.user = user;
+            inValue.Body.sala = sala;
+            cliente.sservicioChat.desconectarResponse retVal = ((cliente.sservicioChat.Service1Soap)(this)).desconectar(inValue);
+            return retVal.Body.desconectarResult;
         }
     }
 }

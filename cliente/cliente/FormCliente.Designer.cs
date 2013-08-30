@@ -88,6 +88,7 @@
             this.salirBoton.TabIndex = 4;
             this.salirBoton.Text = "Salir";
             this.salirBoton.UseVisualStyleBackColor = false;
+            this.salirBoton.Click += new System.EventHandler(this.salirBoton_Click);
             // 
             // nombre
             // 
@@ -168,6 +169,7 @@
             this.desconectarBoton.TabIndex = 13;
             this.desconectarBoton.Text = "Desconectarse";
             this.desconectarBoton.UseVisualStyleBackColor = true;
+            this.desconectarBoton.Click += new System.EventHandler(this.desconectarBoton_Click);
             // 
             // cambioSala
             // 

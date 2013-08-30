@@ -25,6 +25,7 @@ namespace cliente
         string miIp;
         int miPuerto = -1;
         string miSala;
+        int conectado;
         Comunicacion servicio = new Comunicacion();
         delegate void writeMsgCallback(string msg);
 
@@ -33,7 +34,6 @@ namespace cliente
         {
             InitializeComponent();
             this.password.PasswordChar = '*';
-            //AGREGAAAAAAAAAAAR
             this.linkPerfil.Hide();
         }
 
@@ -77,6 +77,7 @@ namespace cliente
                 if (valorLogin == 1)
                 {
                     // Solicitamos la ip y el puerto al servidor
+                    conectado = 1;
                     miIp = servicio.entregaIp(user);
                     miPuerto = servicio.entregaPuerto(user);
                     miSala = "Principal";
@@ -90,6 +91,7 @@ namespace cliente
                     this.participantes.Enabled = true;
                     this.enviarBoton.Enabled = true;
                     this.ayudanteSalaBoton.Enabled = true;
+                    this.salirBoton.Enabled = false;
                     //AGREGAR*****
                     this.linkPerfil.Show();
                     // Se muestran los usuarios conectados
@@ -261,5 +263,33 @@ namespace cliente
                 this.chat.Refresh();
             }
         }
-    }
-}
+
+        private void desconectarBoton_Click(object sender, EventArgs e)
+        {
+            string user = nickName.Text;
+            if (servicio.desconectar(user, miSala).CompareTo(1) == 0)
+            {
+                MessageBox.Show("Te has desconectado del Chat del DIINF, nos vemos!");
+                conectado = 0;
+                this.chat.Enabled = false;
+                this.botonConectar.Enabled = true;
+                this.desconectarBoton.Enabled = false;
+                this.mensaje.Enabled = false;
+                this.participantes.Enabled = false;
+                this.enviarBoton.Enabled = false;
+                this.ayudanteSalaBoton.Enabled = false;
+                this.nombre.Text = "Chat del DIINF";
+                this.linkPerfil.Hide();
+                this.salirBoton.Enabled = true;
+
+            }
+        }
+
+        private void salirBoton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+
+        }
+  }
