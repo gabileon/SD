@@ -19,25 +19,35 @@ namespace cliente
         private Button botonConectar;
         // Hebra para escuchar mensajes
         public Thread receiver;
+        delegate void SetTextCallback();
+        static List<Usuario> listaConectados = new List<Usuario>();
+        string user;
+        string miIp;
+        int miPuerto = -1;
+        string miSala;
+        Comunicacion servicio = new Comunicacion();
+        delegate void writeMsgCallback(string msg);
 
         // Constructor que inicializa la vista
         public FormCliente()
         {
             InitializeComponent();
+            this.password.PasswordChar = '*';
+            //AGREGAAAAAAAAAAAR
+            this.linkPerfil.Hide();
         }
 
         // Método que se ejecuta cuando el usuario quiere ingresar en la aplicación
         private void conectarBoton_Click(object sender, EventArgs e)
         {
             // Se obtiene la información del usuario ingresada
-            String user = this.nickName.Text;
+            user = this.nickName.Text;
             String pass = password.Text;
             // Atributos para obtener la ip local del usuario
             String ipLocal = "";
             int valorLogin = 0;
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             // Se crea el objeto para acceder a los métodos del WS
-            Comunicacion servicio = new Comunicacion();
 
             // Se realiza un búsqueda de la ip local que está conectado el cliente
             foreach (IPAddress ip in host.AddressList)
@@ -63,18 +73,39 @@ namespace cliente
                     valorLogin = -1;
                 }
 
-                // Si el retorno es uno, se instancia el Form "Principal" con los parámetros de nombre de
-                // usuario, contraseña y dirección IP los cuales son usados de forma interna por ese Form.
-                // Además, se da inicio al uso de la hebra, en este caso se instancia haciendo uso del método
-                // "packetReceive", se modifica un atributo del Thread y se inicia con el método Start().
-                // Luego, se incluyen los casos para cuando la variable de retorno de la llamada al Servicio
-                // no es el caso exitoso.
+                // El usuario ha ingresado el nombre y contraseña correctamente
                 if (valorLogin == 1)
                 {
+                    // Solicitamos la ip y el puerto al servidor
+                    miIp = servicio.entregaIp(user);
+                    miPuerto = servicio.entregaPuerto(user);
+                    miSala = "Principal";
+                    // Habilitamos y deshabilitamos lo que corresponda
+                    MessageBox.Show("Se ha conectado exitosamente");
                     this.chat.Enabled = true;
                     this.botonConectar.Enabled = false;
                     this.desconectarBoton.Enabled = true;
-                    receiver = new Thread(packetReceive);
+                    this.nombre.Text = "¡Hola "+ user +"!";
+                    this.mensaje.Enabled = true;
+                    this.participantes.Enabled = true;
+                    this.enviarBoton.Enabled = true;
+                    this.ayudanteSalaBoton.Enabled = true;
+                    //AGREGAR*****
+                    this.linkPerfil.Show();
+                    // Se muestran los usuarios conectados
+                    String usuariosConectados = servicio.entregaConectados();
+                    String[] split = usuariosConectados.Split(';');
+                    this.participantes.Items.Clear();
+                    listaConectados.Clear();
+                    for (int i = 0; i < split.Length - 1; i = i + 2)
+                    {
+                        Usuario xx = new Usuario(split[i], split[i+1], 1);
+                        listaConectados.Add(xx);
+                        this.participantes.Items.Add(split[i]);
+                    }
+
+                    // Comienza a actuar la hebra
+                    receiver = new Thread(funcionHiloEscucha);
                     receiver.IsBackground = true;
                     receiver.Start();
                 }
@@ -92,7 +123,7 @@ namespace cliente
                 }
                 if (valorLogin == -1)
                 {
-                    MessageBox.Show("Error");
+                    MessageBox.Show("Error: Intente más tarde");
                 }
             }
             else
@@ -125,19 +156,109 @@ namespace cliente
             // (desde el método "clickBotonLogIn") con el ID de la hebra creada al presionar el botón que llama al
             // Form, los cuales de ser distintos generan un retorno de "true". Esto puede desarrollarse también 
             // con un parámetro como se observa en el método "SetTextpriv" del Form "Principal".
-            if (this.buttonlogin.InvokeRequired)
+            if (this.botonConectar.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(Setboton);
                 this.Invoke(d, new object[] { });
             }
             else
             {
-                this.Focus();
-                this.buttonlogin.Enabled = true;
-                this.buttonregistrar.Enabled = true;
-                this.textBoxnombreusuario.Text = "";
-                this.textBoxpassword.Text = "";
+                this.botonConectar.Enabled = true;
+                this.botonConectar.Enabled = true;
+                this.nickName.Text = "";
+                this.contrasena.Text = "";
                 this.receiver.Abort();
+            }
+        }
+     
+        private void botonRegistrar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormRegistro registro = new FormRegistro();
+            registro.Show();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            String user = this.nickName.Text;
+            String pass = password.Text;
+            FormPerfil perfil = new FormPerfil(user, pass);
+            this.Hide();
+            perfil.Show();
+        }
+
+        private void enviarBoton_Click(object sender, EventArgs e)
+        {
+            this.enviarMensaje();
+        }
+
+        private void enviarMensaje()
+        {
+            string mensajito = this.mensaje.Text;
+            if (!string.IsNullOrEmpty(mensajito))
+            {
+                servicio.enviarMsj(user, mensajito, miSala);
+                this.mensaje.Clear();
+            }
+        }
+
+        private void funcionHiloEscucha()
+        {
+            string mensaje = "";
+            string[] separado;
+            while (miPuerto == -1) { }
+            while (true)
+            {
+                try
+                {
+                    UdpClient clienteUDP = new UdpClient(miPuerto);
+                    IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, miPuerto);
+                    byte[] datos;
+                    datos = clienteUDP.Receive(ref endpoint);
+                    mensaje = Encoding.UTF8.GetString(datos, 0, datos.Length);
+                    separado = mensaje.Split('´');
+
+                    //Verificar tipo de string que viene en el separado[0], caso de ser
+                    //una nueva conexión privada, verificar si se ha abierto o no ventanas de esas
+                    //Actualiza ventana texto del form principal
+                    if (separado[0].CompareTo("avt") == 0)
+                    {
+                        this.writeMsg(separado[1]);
+                        if (separado.Length > 2)
+                        {
+                            this.participantes.Items.Clear();
+                            int saltarCero = -2;
+                            foreach (string c in separado)
+                            {
+                                if (saltarCero == 0)
+                                    this.participantes.Items.Add(c);
+                                else saltarCero += 1;
+                            }
+                        }
+                    }
+                    clienteUDP.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+                mensaje = "";
+            }
+        }
+
+        private void writeMsg(string msg)
+        {
+            if (this.chat.InvokeRequired)
+            {
+                writeMsgCallback d = new writeMsgCallback(writeMsg);
+                this.Invoke(d, new object[] { msg });
+            }
+            else
+            {
+                this.chat.Text += msg + "\r\n";
+                this.chat.SelectionStart = this.chat.Text.Length;
+                this.chat.ScrollToCaret();
+                this.chat.Refresh();
             }
         }
     }

@@ -18,6 +18,87 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ipResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="puerto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="puertoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="puertoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="entregaConectados">
+        <s:complexType />
+      </s:element>
+      <s:element name="entregaConectadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entregaConectadosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="registrar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="registrarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="registrarResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cambiarContraseña">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passvieja" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cambiarContraseñaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cambiarContraseñaResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="enviarMensaje">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mensaje" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sala" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="enviarMensajeResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="loginSoapIn">
@@ -26,10 +107,70 @@
   <wsdl:message name="loginSoapOut">
     <wsdl:part name="parameters" element="tns:loginResponse" />
   </wsdl:message>
+  <wsdl:message name="ipSoapIn">
+    <wsdl:part name="parameters" element="tns:ip" />
+  </wsdl:message>
+  <wsdl:message name="ipSoapOut">
+    <wsdl:part name="parameters" element="tns:ipResponse" />
+  </wsdl:message>
+  <wsdl:message name="puertoSoapIn">
+    <wsdl:part name="parameters" element="tns:puerto" />
+  </wsdl:message>
+  <wsdl:message name="puertoSoapOut">
+    <wsdl:part name="parameters" element="tns:puertoResponse" />
+  </wsdl:message>
+  <wsdl:message name="entregaConectadosSoapIn">
+    <wsdl:part name="parameters" element="tns:entregaConectados" />
+  </wsdl:message>
+  <wsdl:message name="entregaConectadosSoapOut">
+    <wsdl:part name="parameters" element="tns:entregaConectadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="registrarSoapIn">
+    <wsdl:part name="parameters" element="tns:registrar" />
+  </wsdl:message>
+  <wsdl:message name="registrarSoapOut">
+    <wsdl:part name="parameters" element="tns:registrarResponse" />
+  </wsdl:message>
+  <wsdl:message name="cambiarContraseñaSoapIn">
+    <wsdl:part name="parameters" element="tns:cambiarContraseña" />
+  </wsdl:message>
+  <wsdl:message name="cambiarContraseñaSoapOut">
+    <wsdl:part name="parameters" element="tns:cambiarContraseñaResponse" />
+  </wsdl:message>
+  <wsdl:message name="enviarMensajeSoapIn">
+    <wsdl:part name="parameters" element="tns:enviarMensaje" />
+  </wsdl:message>
+  <wsdl:message name="enviarMensajeSoapOut">
+    <wsdl:part name="parameters" element="tns:enviarMensajeResponse" />
+  </wsdl:message>
   <wsdl:portType name="Service1Soap">
     <wsdl:operation name="login">
       <wsdl:input message="tns:loginSoapIn" />
       <wsdl:output message="tns:loginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ip">
+      <wsdl:input message="tns:ipSoapIn" />
+      <wsdl:output message="tns:ipSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="puerto">
+      <wsdl:input message="tns:puertoSoapIn" />
+      <wsdl:output message="tns:puertoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="entregaConectados">
+      <wsdl:input message="tns:entregaConectadosSoapIn" />
+      <wsdl:output message="tns:entregaConectadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="registrar">
+      <wsdl:input message="tns:registrarSoapIn" />
+      <wsdl:output message="tns:registrarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cambiarContraseña">
+      <wsdl:input message="tns:cambiarContraseñaSoapIn" />
+      <wsdl:output message="tns:cambiarContraseñaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="enviarMensaje">
+      <wsdl:input message="tns:enviarMensajeSoapIn" />
+      <wsdl:output message="tns:enviarMensajeSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
@@ -43,11 +184,119 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ip">
+      <soap:operation soapAction="http://tempuri.org/ip" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="puerto">
+      <soap:operation soapAction="http://tempuri.org/puerto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entregaConectados">
+      <soap:operation soapAction="http://tempuri.org/entregaConectados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrar">
+      <soap:operation soapAction="http://tempuri.org/registrar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambiarContraseña">
+      <soap:operation soapAction="http://tempuri.org/cambiarContraseña" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="enviarMensaje">
+      <soap:operation soapAction="http://tempuri.org/enviarMensaje" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="login">
       <soap12:operation soapAction="http://tempuri.org/login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ip">
+      <soap12:operation soapAction="http://tempuri.org/ip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="puerto">
+      <soap12:operation soapAction="http://tempuri.org/puerto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entregaConectados">
+      <soap12:operation soapAction="http://tempuri.org/entregaConectados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrar">
+      <soap12:operation soapAction="http://tempuri.org/registrar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambiarContraseña">
+      <soap12:operation soapAction="http://tempuri.org/cambiarContraseña" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="enviarMensaje">
+      <soap12:operation soapAction="http://tempuri.org/enviarMensaje" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -33,7 +33,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonRegistrar = new System.Windows.Forms.Button();
+            this.Volver = new System.Windows.Forms.Button();
+            this.Registrar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +74,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonRegistrar);
+            this.groupBox1.Controls.Add(this.Volver);
+            this.groupBox1.Controls.Add(this.Registrar);
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.labelPassword);
@@ -86,15 +88,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro";
             // 
-            // buttonRegistrar
+            // Volver
             // 
-            this.buttonRegistrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.buttonRegistrar.Location = new System.Drawing.Point(40, 174);
-            this.buttonRegistrar.Name = "buttonRegistrar";
-            this.buttonRegistrar.Size = new System.Drawing.Size(171, 32);
-            this.buttonRegistrar.TabIndex = 12;
-            this.buttonRegistrar.Text = "Registrar";
-            this.buttonRegistrar.UseVisualStyleBackColor = true;
+            this.Volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.Volver.Location = new System.Drawing.Point(131, 170);
+            this.Volver.Name = "Volver";
+            this.Volver.Size = new System.Drawing.Size(112, 32);
+            this.Volver.TabIndex = 13;
+            this.Volver.Text = "Volver";
+            this.Volver.UseVisualStyleBackColor = true;
+            this.Volver.Click += new System.EventHandler(this.Volver_Click);
+            // 
+            // Registrar
+            // 
+            this.Registrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.Registrar.Location = new System.Drawing.Point(-1, 170);
+            this.Registrar.Name = "Registrar";
+            this.Registrar.Size = new System.Drawing.Size(112, 32);
+            this.Registrar.TabIndex = 12;
+            this.Registrar.Text = "Registrar";
+            this.Registrar.UseVisualStyleBackColor = true;
+            this.Registrar.Click += new System.EventHandler(this.Registrar_Click);
             // 
             // FormRegistro
             // 
@@ -118,6 +132,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonRegistrar;
+        private System.Windows.Forms.Button Registrar;
+        private System.Windows.Forms.Button Volver;
     }
 }

@@ -31,9 +31,8 @@
             this.chat = new System.Windows.Forms.RichTextBox();
             this.mensaje = new System.Windows.Forms.TextBox();
             this.enviarBoton = new System.Windows.Forms.Button();
-            this.participantes = new System.Windows.Forms.RichTextBox();
             this.salirBoton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.nombre = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,6 +45,8 @@
             this.ayudanteSalaBoton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.botonRegistrar = new System.Windows.Forms.Button();
+            this.linkPerfil = new System.Windows.Forms.LinkLabel();
+            this.participantes = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // chat
@@ -76,15 +77,7 @@
             this.enviarBoton.TabIndex = 2;
             this.enviarBoton.Text = "Enviar";
             this.enviarBoton.UseVisualStyleBackColor = false;
-            // 
-            // participantes
-            // 
-            this.participantes.Enabled = false;
-            this.participantes.Location = new System.Drawing.Point(265, 40);
-            this.participantes.Name = "participantes";
-            this.participantes.Size = new System.Drawing.Size(108, 153);
-            this.participantes.TabIndex = 3;
-            this.participantes.Text = "";
+            this.enviarBoton.Click += new System.EventHandler(this.enviarBoton_Click);
             // 
             // salirBoton
             // 
@@ -96,15 +89,15 @@
             this.salirBoton.Text = "Salir";
             this.salirBoton.UseVisualStyleBackColor = false;
             // 
-            // label1
+            // nombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 17);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Chat del DIINF";
+            this.nombre.AutoSize = true;
+            this.nombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nombre.Location = new System.Drawing.Point(12, 9);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(98, 17);
+            this.nombre.TabIndex = 5;
+            this.nombre.Text = "Chat del DIINF";
             // 
             // label2
             // 
@@ -212,6 +205,27 @@
             this.botonRegistrar.TabIndex = 17;
             this.botonRegistrar.Text = "Registrate";
             this.botonRegistrar.UseVisualStyleBackColor = true;
+            this.botonRegistrar.Click += new System.EventHandler(this.botonRegistrar_Click);
+            // 
+            // linkPerfil
+            // 
+            this.linkPerfil.AutoSize = true;
+            this.linkPerfil.LinkColor = System.Drawing.Color.RoyalBlue;
+            this.linkPerfil.Location = new System.Drawing.Point(116, 11);
+            this.linkPerfil.Name = "linkPerfil";
+            this.linkPerfil.Size = new System.Drawing.Size(81, 13);
+            this.linkPerfil.TabIndex = 18;
+            this.linkPerfil.TabStop = true;
+            this.linkPerfil.Text = "Configurar Perfil";
+            this.linkPerfil.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // participantes
+            // 
+            this.participantes.FormattingEnabled = true;
+            this.participantes.Location = new System.Drawing.Point(265, 43);
+            this.participantes.Name = "participantes";
+            this.participantes.Size = new System.Drawing.Size(98, 147);
+            this.participantes.TabIndex = 19;
             // 
             // FormCliente
             // 
@@ -219,6 +233,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(599, 278);
+            this.Controls.Add(this.participantes);
+            this.Controls.Add(this.linkPerfil);
             this.Controls.Add(this.botonRegistrar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.ayudanteSalaBoton);
@@ -231,9 +247,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nombre);
             this.Controls.Add(this.salirBoton);
-            this.Controls.Add(this.participantes);
             this.Controls.Add(this.enviarBoton);
             this.Controls.Add(this.mensaje);
             this.Controls.Add(this.chat);
@@ -249,9 +264,8 @@
         private System.Windows.Forms.RichTextBox chat;
         private System.Windows.Forms.TextBox mensaje;
         private System.Windows.Forms.Button enviarBoton;
-        private System.Windows.Forms.RichTextBox participantes;
         private System.Windows.Forms.Button salirBoton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label nombre;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -264,6 +278,8 @@
         private System.Windows.Forms.Button ayudanteSalaBoton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button botonRegistrar;
+        private System.Windows.Forms.LinkLabel linkPerfil;
+        private System.Windows.Forms.ListBox participantes;
     }
 }
 
