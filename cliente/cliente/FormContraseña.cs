@@ -31,35 +31,45 @@ namespace cliente
 
             if (pass1.CompareTo(pass2) == 0)
             {
+                if (pass1.Length > 4)
+                {
+                    Comunicacion llamar = new Comunicacion();
+                    int contraseña = llamar.cambiarContraseña(nickname, pass1, password);
 
-                Comunicacion llamar = new Comunicacion();
-                int contraseña = llamar.cambiarContraseña(nickname, pass1, password);
+                    if (contraseña.CompareTo(1) == 0)
+                    {
 
-                if (contraseña.CompareTo(1) == 0) {
-                    
-                    MessageBox.Show("¡Se cambió la clave exitosamente!");
-                    
-                    this.Hide();
-                    FormPerfil perfil = new FormPerfil(nickname, pass1);
-                    perfil.Show();     
-                
+                        MessageBox.Show("¡Se cambió la clave exitosamente!");
+
+                        this.Hide();
+                        //ver esta parte para que persista la conexion
+
+                    }
+                    else if (contraseña.CompareTo(-1) == 0)
+                    {
+                        MessageBox.Show("¡No paso nada! + " + contraseña);
+
+                    }
+                } 
+                else {
+                MessageBox.Show("La clave debe tener mínimo 5 caracteres");
+            }}
+                else
+                {
+
+                    MessageBox.Show("Las contraseñas no coiciden");
+
                 }
-                else{
-                    MessageBox.Show("¡No paso nada! + " + contraseña);
-                
-                }
-
-
-
+            password = pass1;
             }
-            else {
+           
 
-                MessageBox.Show("Las contraseñas no coiciden");
-            
-            }
+        
 
-
-
+        private string volverPerfil_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            return password;
         }
 
 

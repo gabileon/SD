@@ -36,7 +36,7 @@ namespace cliente
                 {
                     MessageBox.Show("Ingrese todos los campos");
                 }
-                else
+                else if((user.Length > 4) && (pass.Length > 4))
                 {
                     registroRetorno = llamar.Registrar(user, pass);
                     if (registroRetorno == 0)
@@ -50,6 +50,11 @@ namespace cliente
                         MessageBox.Show("El username ya existe, intente con otro" );
                                          
                     }
+
+                }
+                else
+                {
+                    MessageBox.Show("El username y password eben tener mínimo 5 caracteres");
 
                 }
             }

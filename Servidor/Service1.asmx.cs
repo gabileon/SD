@@ -152,23 +152,30 @@ namespace Servidor
                         if (username.CompareTo(line) == 0)
                         {
                             line = sr.ReadLine();
-                                                    }
+                            if (username.CompareTo("***" + (char)13 + (char)10) != 0)
+                            {
+                                sr.Close();
+                                return 1;
+                            }
+                        }
                         line = sr.ReadLine();
                     }
                     sr.Close();
                 }
+                FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt", FileMode.Append, FileAccess.Write);
+                StreamWriter writer = new StreamWriter(stream);
+                writer.WriteLine(username);
+                writer.WriteLine(password);
+                writer.Close();
+                return 0;
+
             }
             catch (Exception e)
             {
                 Console.WriteLine("EXCEPCIÓN DE TIPO:" + e.Message.ToString() + "----------");
                 return -1;
             }
-            FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/Usuarios.txt", FileMode.Append, FileAccess.Write);
-            StreamWriter writer = new StreamWriter(stream);
-            writer.WriteLine(username);
-            writer.WriteLine(password);
-            writer.Close();
-            return 0;
+          
 
 
         }
@@ -268,7 +275,7 @@ namespace Servidor
         {
             string time = obtenerTimeStamp(DateTime.Now);
             string mensajeAdios = time + " - " +user + " ha abandonado la conversación.";
-            bcNuevoMensaje(user,mensajeAdios,sala);
+            bcActClientes(user,mensajeAdios,sala);
 
            //Remueve el usuario de las listas y de la sala
 
@@ -276,27 +283,19 @@ namespace Servidor
             UsuariosConectados.Remove(user);
             salaPrincipal.Remove(user);
 
-
-         
-           
-          
-           
-
             return 1;
             
 
         }
         public void generarLog(string user, string mensaje, string sala, string time ){
 
-            //Debería registrar cuando incia la conversación pero no lo puedo obtener todavía, solo debería ser cuando entra a la sala
+            
 
          //   FileStream stream = new FileStream("C:/Users/Gabriela/Documents/GitHub/SD/"+tiempoinici+user+"_"+user2+".txt", FileMode.Append, FileAccess.Write);
           //  StreamWriter writer = new StreamWriter(stream);
            // writer.WriteLine(time + "<"+user+">" + ": " + mensaje );
             //writer.Close();
-            
-
-        
+  
         
         }
 
@@ -337,9 +336,14 @@ namespace Servidor
                 {
                     Usuario cli;
                     UsuariosConectados.TryGetValue(cliente, out cli);
+                    foreach (string u in salaPrincipal) 
+                    {
+                        mensaje += "´" + u;
+                    }
                     if (cli.user.CompareTo(usuario) != 0)
                     {
-                        mensaje += "´" + cli.user;
+                        
+                        //mensaje += "´" + cli.user;
                         enviar(mensaje, cli);
                     }
                 }

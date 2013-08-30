@@ -28,13 +28,19 @@ namespace cliente
 
         public int Registrar(String user, String pass)
         {
-            return Servicio.registrar(user, pass);
+
+            
+                return Servicio.registrar(user, pass);
+      
+    
+        
+    }
 
             // Método que permite utilizar el Servicio "registrar", retornando de forma directa lo recibido
             // como retorno del WebService, con los parámetros capturados a través del Form "Registrar".
             // De fallar la operación, retorna un valor que pueda ser identificado por el cliente como tal.
 
-        }
+        
 
         public int desconectar(String user, String sala) {
 

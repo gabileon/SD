@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.volverPerfil = new System.Windows.Forms.Button();
+            this.cambiarContraseña = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.cambiarContraseña = new System.Windows.Forms.Button();
-            this.volverPerfil = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +53,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cambio Contraseña";
+            // 
+            // volverPerfil
+            // 
+            this.volverPerfil.Location = new System.Drawing.Point(159, 165);
+            this.volverPerfil.Name = "volverPerfil";
+            this.volverPerfil.Size = new System.Drawing.Size(124, 30);
+            this.volverPerfil.TabIndex = 5;
+            this.volverPerfil.Text = "Volver";
+            this.volverPerfil.UseVisualStyleBackColor = true;
+          
+            // 
+            // cambiarContraseña
+            // 
+            this.cambiarContraseña.Location = new System.Drawing.Point(14, 165);
+            this.cambiarContraseña.Name = "cambiarContraseña";
+            this.cambiarContraseña.Size = new System.Drawing.Size(124, 30);
+            this.cambiarContraseña.TabIndex = 4;
+            this.cambiarContraseña.Text = "Cambiar";
+            this.cambiarContraseña.UseVisualStyleBackColor = true;
+            this.cambiarContraseña.Click += new System.EventHandler(this.cambiarContraseña_Click);
             // 
             // label2
             // 
@@ -85,25 +105,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(146, 22);
             this.textBox1.TabIndex = 0;
-            // 
-            // cambiarContraseña
-            // 
-            this.cambiarContraseña.Location = new System.Drawing.Point(14, 165);
-            this.cambiarContraseña.Name = "cambiarContraseña";
-            this.cambiarContraseña.Size = new System.Drawing.Size(124, 30);
-            this.cambiarContraseña.TabIndex = 4;
-            this.cambiarContraseña.Text = "Cambiar";
-            this.cambiarContraseña.UseVisualStyleBackColor = true;
-            this.cambiarContraseña.Click += new System.EventHandler(this.cambiarContraseña_Click);
-            // 
-            // volverPerfil
-            // 
-            this.volverPerfil.Location = new System.Drawing.Point(159, 165);
-            this.volverPerfil.Name = "volverPerfil";
-            this.volverPerfil.Size = new System.Drawing.Size(124, 30);
-            this.volverPerfil.TabIndex = 5;
-            this.volverPerfil.Text = "Volver";
-            this.volverPerfil.UseVisualStyleBackColor = true;
             // 
             // FormContraseña
             // 

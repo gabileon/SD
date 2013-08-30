@@ -25,9 +25,15 @@ namespace cliente
         string miIp;
         int miPuerto = -1;
         string miSala;
-        int conectado;
+     
         Comunicacion servicio = new Comunicacion();
         delegate void writeMsgCallback(string msg);
+        
+        //Sonidos
+        System.Media.SoundPlayer startSoundPlayer = new System.Media.SoundPlayer(@"C:\Users\Gabriela\Documents\GitHub\SD\Servidor\login.wav");
+        System.Media.SoundPlayer sonidoMensaje = new System.Media.SoundPlayer(@"C:\Users\Gabriela\Documents\GitHub\SD\Servidor\mensaje.wav");
+        System.Media.SoundPlayer sonidoLogout = new System.Media.SoundPlayer(@"C:\Users\Gabriela\Documents\GitHub\SD\Servidor\logout.wav");
+
 
         // Constructor que inicializa la vista
         public FormCliente()
@@ -77,8 +83,9 @@ namespace cliente
                 // El usuario ha ingresado el nombre y contraseña correctamente
                 if (valorLogin == 1)
                 {
+                    startSoundPlayer.Play();
                     // Solicitamos la ip y el puerto al servidor
-                    conectado = 1;
+                   
                     miIp = servicio.entregaIp(user);
                     miPuerto = servicio.entregaPuerto(user);
                     miSala = "Principal";
@@ -186,7 +193,7 @@ namespace cliente
             String user = this.nickName.Text;
             String pass = password.Text;
             FormPerfil perfil = new FormPerfil(user, pass);
-            this.Hide();
+            //this.Hide();
             perfil.Show();
         }
 
@@ -214,6 +221,7 @@ namespace cliente
             {
                 try
                 {
+                    
                     UdpClient clienteUDP = new UdpClient(miPuerto);
                     IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, miPuerto);
                     byte[] datos;
@@ -226,6 +234,7 @@ namespace cliente
                     //Actualiza ventana texto del form principal
                     if (separado[0].CompareTo("avt") == 0)
                     {
+                        sonidoMensaje.Play();
                         this.writeMsg(separado[1]);
                         if (separado.Length > 2)
                         {
@@ -270,9 +279,13 @@ namespace cliente
             string user = nickName.Text;
             if (servicio.desconectar(user, miSala).CompareTo(1) == 0)
             {
+                sonidoLogout.Play();
                 MessageBox.Show("Te has desconectado del Chat del DIINF, nos vemos!");
-                conectado = 0;
+               
                 this.chat.Enabled = false;
+                this.chat.Text = "";
+                this.participantes.Items.Clear();
+
                 this.botonConectar.Enabled = true;
                 this.desconectarBoton.Enabled = false;
                 this.mensaje.Enabled = false;
@@ -282,7 +295,8 @@ namespace cliente
                 this.nombre.Text = "Chat del DIINF";
                 this.linkPerfil.Hide();
                 this.salirBoton.Enabled = true;
-
+                this.botonRegistrar.Enabled = true;
+                this.mensaje.Text = "";
             }
         }
 
@@ -290,6 +304,8 @@ namespace cliente
         {
             this.Dispose();
         }
+
+  
 
 
         }

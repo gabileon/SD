@@ -66,6 +66,7 @@
             this.mensaje.Name = "mensaje";
             this.mensaje.Size = new System.Drawing.Size(233, 20);
             this.mensaje.TabIndex = 1;
+          
             // 
             // enviarBoton
             // 
